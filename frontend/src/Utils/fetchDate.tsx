@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 
 export function getDate() {
     const [products, setProducts] = useState<fetchTypeData[]>([]);
-    // const typeUrl = search ? `data/${search}` : "data";
-
     const fetchDate = async () => {
         const res = await fetch("http://localhost:3000/data", {
             method: "GET",
@@ -20,11 +18,9 @@ export function getDate() {
 
     useEffect(() => {
         fetchDate();
-    }, [search]);
+    }, []);
 
     return {
-        products,
-        setSearch,
-        search
+        products
     };
 }

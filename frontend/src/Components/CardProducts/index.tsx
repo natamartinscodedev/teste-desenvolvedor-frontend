@@ -5,18 +5,15 @@ import React, { useState } from 'react'
 
 const index = ({ data }: typeData) => {
     const [id, setId]: any = useState('')
-
-    // console.log("Data ==>", data)
-
-    const getIdProduct = (e: any) => {
-        e.preventDefault()
+    const getIdProduct = () => {
         setId(data.id)
     }
 
     return (
         <Link
             onClick={getIdProduct}
-            href={`Product/${id}`}
+            href={`product/${id}`}
+            target='__blank'
             className='card_products'
         >
             <p>Nome: {data.name}</p>
