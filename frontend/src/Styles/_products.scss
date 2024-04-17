@@ -1,0 +1,16 @@
+.container_card-products {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.card_products  {
+    background-color: rebeccapurple;
+    max-width: 20rem;
+    padding: 10px 1.5rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: aquamarine;
+    }
+}

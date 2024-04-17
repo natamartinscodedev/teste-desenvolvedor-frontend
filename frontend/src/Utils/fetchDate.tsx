@@ -1,29 +1,30 @@
-import { useEffect, useState } from "react"
+import { fetchTypeData } from "@/ts/typeProducts";
+import { useEffect, useState } from "react";
 
 export function getDate() {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [products, setProducts] = useState('')
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [search, setSearch] = useState('')
-
-    const typeUrl = search ? `data/${search}` : "data"
+    const [products, setProducts] = useState<fetchTypeData[]>([]);
+    // const typeUrl = search ? `data/${search}` : "data";
 
     const fetchDate = async () => {
-        const res = await fetch("http://localhost:3000/" + `${typeUrl}` + `?_page=:${1}`)
-        const date: any = await res.json()
+        const res = await fetch("http://localhost:3000/data", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+        const data: fetchTypeData[] = await res.json();
 
-        setProducts(date)
-    }
+        const sortedProducts = data.sort((a: fetchTypeData, b: fetchTypeData) => new Date(a.published_at) - new Date(b.published_at));
+        setProducts(sortedProducts);
+    };
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
-        fetchDate()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        fetchDate();
+    }, [search]);
 
     return {
         products,
         setSearch,
         search
-    }
+    };
 }

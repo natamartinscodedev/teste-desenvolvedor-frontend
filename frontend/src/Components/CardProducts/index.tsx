@@ -1,34 +1,26 @@
-import React from 'react'
-
-interface typeData {
-    data: {
-        id: number,
-        name: string,
-        active_principles: [
-            {
-                id: number,
-                name: string
-            }
-        ],
-        company: string,
-        documents: [
-            {
-                expedient: number,
-                id: string,
-                type: string,
-                url: string
-            }
-        ],
-        published_at: string
-    }
-}
+'use client'
+import { typeData } from '@/ts/typeProducts'
+import Link from 'next/link'
+import React, { useState } from 'react'
 
 const index = ({ data }: typeData) => {
+    const [id, setId]: any = useState('')
+
+    // console.log("Data ==>", data)
+
+    const getIdProduct = (e: any) => {
+        e.preventDefault()
+        setId(data.id)
+    }
 
     return (
-        <div>
-            <p>{data.name}</p>
-        </div>
+        <Link
+            onClick={getIdProduct}
+            href={`Product/${id}`}
+            className='card_products'
+        >
+            <p>Nome: {data.name}</p>
+        </Link>
     )
 }
 
